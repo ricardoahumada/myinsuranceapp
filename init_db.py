@@ -17,6 +17,13 @@ cur.execute("INSERT INTO Users (fullname, email, birthdate, country, city, addre
             )
 
 # PRODUCTS
+cur.execute("INSERT INTO Products (name , description , cost, is_active) VALUES (?, ?, ?, ?)",
+            ('Product1', 'Description1',50,True)
+            )
+
+cur.execute("INSERT INTO Products (name , description , cost, is_active) VALUES (?, ?, ?, ?)",
+            ('Product2', 'Description2', 20,True)
+            )
 
 
 connection.commit()

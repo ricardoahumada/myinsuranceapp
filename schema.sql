@@ -10,3 +10,14 @@ CREATE TABLE users (
     city TEXT ,
     address TEXT 
 );
+
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP ,
+    name TEXT ,
+    description TEXT,
+    cost float ,
+    is_active boolean 
+);

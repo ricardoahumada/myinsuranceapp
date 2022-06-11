@@ -9,6 +9,15 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def get_product(product_id):
+    conn = get_db_connection()
+    product = conn.execute('SELECT * FROM products WHERE id = ?',
+                        (product_id,)).fetchone()
+    conn.close()
+    if product is None:
+        abort(404)
+    return product
+
 def get_user(user_id):
     conn = get_db_connection()
     user = conn.execute('SELECT * FROM users WHERE id = ?',
@@ -24,9 +33,14 @@ app.config['SECRET_KEY'] = 'your secret key'
 app.debug = True
 
 
+""" Routes/Controllers ROOT """
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 """ Routes/Controllers USER """
 @app.route('/users/')
-def index():
+def users():
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.close()
@@ -38,7 +52,7 @@ def user(user_id):
     return render_template('user/user.html', user=theuser)
 
 @app.route('/users/create', methods=('GET', 'POST'))
-def create():
+def createuser():
     if request.method == 'POST':
         app.logger.info(request.form)
         fullname = request.form['fullname']
@@ -56,12 +70,12 @@ def create():
                          (fullname, email, birthdate, country, city, address))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('indexuser'))
 
     return render_template('user/create.html', user=user)
 
 @app.route('/users/<int:id>/edit', methods=('GET', 'POST'))
-def edit(id):
+def edituser(id):
     user = get_user(id)
 
     if request.method == 'POST':
@@ -81,18 +95,86 @@ def edit(id):
                          (fullname, email, birthdate, country, city, address, id))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('indexuser'))
 
     return render_template('user/edit.html', user=user)
 
 @app.route('/users/<int:id>/delete', methods=('POST',))
-def delete(id):
+def deleteuser(id):
     user = get_user(id)
     conn = get_db_connection()
     conn.execute('DELETE FROM users WHERE id = ?', (id,))
     conn.commit()
     conn.close()
     flash('"{}" was successfully deleted!'.format(user['fullname']))
-    return redirect(url_for('index'))
+    return redirect(url_for('indexuser'))
+
+
 
 """ Routes/Controllers PRODUCTS """
+@app.route('/products/')
+def products():
+    conn = get_db_connection()
+    products = conn.execute('SELECT * FROM products').fetchall()
+    conn.close()
+    return render_template('product/indexproduct.html', products=products)
+
+@app.route('/products/<int:product_id>')
+def product(product_id):
+    theproduct = get_product(product_id)
+    return render_template('product/product.html', product=theproduct)
+
+@app.route('/products/create', methods=('GET', 'POST'))
+def createproduct():
+    if request.method == 'POST':
+        app.logger.info(request.form)
+        name = request.form['name']
+        description = request.form['description']
+        cost= request.form['cost']
+        is_active= request.form['is_active']
+    
+
+        if not name:
+            flash('name is required!')
+        else:
+            conn = get_db_connection()
+            conn.execute('INSERT INTO products (name, description, cost, is_active) VALUES (?, ?, ?, ?)',
+                         (name, description, cost, is_active))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('index'))
+
+    return render_template('product/createproduct.html', product=product)
+
+@app.route('/products/<int:id>/edit', methods=('GET', 'POST'))
+def editproduct(id):
+    product = get_product(id)
+
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        cost= request.form['cost']
+        is_active= request.form['is_active']
+       
+        if not name:
+            flash('Full name is required!')
+        else:
+            conn = get_db_connection()
+            conn.execute('UPDATE products SET name = ?, description = ?, cost=?, is_active=?' 
+                         ' WHERE id = ?',
+                         (name, description, cost, is_active, id))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('index'))
+
+    return render_template('product/editproduct.html', product=product)
+
+@app.route('/products/<int:id>/delete', methods=('POST',))
+def deleteproduct(id):
+    product = get_product(id)
+    conn = get_db_connection()
+    conn.execute('DELETE FROM products WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash('"{}" was successfully deleted!'.format(product['name']))
+    return redirect(url_for('index'))
