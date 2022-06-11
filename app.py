@@ -25,19 +25,19 @@ app.debug = True
 
 
 """ Routes/Controllers USER """
-@app.route('/')
+@app.route('/users/')
 def index():
     conn = get_db_connection()
     users = conn.execute('SELECT * FROM users').fetchall()
     conn.close()
-    return render_template('index.html', users=users)
+    return render_template('user/index.html', users=users)
 
-@app.route('/<int:user_id>')
+@app.route('/users/<int:user_id>')
 def user(user_id):
     theuser = get_user(user_id)
-    return render_template('user.html', user=theuser)
+    return render_template('user/user.html', user=theuser)
 
-@app.route('/create', methods=('GET', 'POST'))
+@app.route('/users/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
         app.logger.info(request.form)
@@ -58,9 +58,9 @@ def create():
             conn.close()
             return redirect(url_for('index'))
 
-    return render_template('create.html', user=user)
+    return render_template('user/create.html', user=user)
 
-@app.route('/<int:id>/edit', methods=('GET', 'POST'))
+@app.route('/users/<int:id>/edit', methods=('GET', 'POST'))
 def edit(id):
     user = get_user(id)
 
@@ -83,9 +83,9 @@ def edit(id):
             conn.close()
             return redirect(url_for('index'))
 
-    return render_template('edit.html', user=user)
+    return render_template('user/edit.html', user=user)
 
-@app.route('/<int:id>/delete', methods=('POST',))
+@app.route('/users/<int:id>/delete', methods=('POST',))
 def delete(id):
     user = get_user(id)
     conn = get_db_connection()
@@ -94,3 +94,5 @@ def delete(id):
     conn.close()
     flash('"{}" was successfully deleted!'.format(user['fullname']))
     return redirect(url_for('index'))
+
+""" Routes/Controllers PRODUCTS """
