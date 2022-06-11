@@ -24,7 +24,7 @@ app.config['SECRET_KEY'] = 'your secret key'
 app.debug = True
 
 
-""" Routes/Controllers """
+""" Routes/Controllers USER """
 @app.route('/')
 def index():
     conn = get_db_connection()
@@ -40,15 +40,20 @@ def user(user_id):
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
+        app.logger.info(request.form)
         fullname = request.form['fullname']
         email = request.form['email']
+        birthdate= request.form['birthdate']
+        country= request.form['country']
+        city= request.form['city']
+        address= request.form['address']
 
         if not fullname:
             flash('Fullname is required!')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO users (fullname, email) VALUES (?, ?)',
-                         (fullname, email))
+            conn.execute('INSERT INTO users (fullname, email, birthdate, country, city, address) VALUES (?, ?, ?, ?, ? , ?  )',
+                         (fullname, email, birthdate, country, city, address))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
@@ -62,14 +67,18 @@ def edit(id):
     if request.method == 'POST':
         fullname = request.form['fullname']
         email = request.form['email']
+        birthdate= request.form['birthdate']
+        country= request.form['country']
+        city= request.form['city']
+        address= request.form['address']
 
         if not fullname:
             flash('Full name is required!')
         else:
             conn = get_db_connection()
-            conn.execute('UPDATE users SET fullname = ?, email = ?'
+            conn.execute('UPDATE users SET fullname = ?, email = ?, birthdate=?, country=?, city=?, address=? '
                          ' WHERE id = ?',
-                         (fullname, email, id))
+                         (fullname, email, birthdate, country, city, address, id))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))

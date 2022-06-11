@@ -8,5 +8,5 @@ CREATE TABLE users (
     birthdate TIMESTAMP ,
     country TEXT ,
     city TEXT ,
-    adress TEXT 
+    address TEXT 
 );

@@ -13,10 +13,45 @@
     </div>
 
     <div class="form-group">
-        <label for="email">email</label>
-        <textarea name="email" placeholder="User email"
-                  class="form-control">{{ request.form['email'] or user['email'] }}</textarea>
+        <label for="email">Email</label>
+        <input type="text" name="email" placeholder="User email"
+               class="form-control"
+               value="{{ request.form['email'] or user['email'] }}">
+        </input>
     </div>
+
+    <div class="form-group">
+        <label for="birthdate">birthdate</label>
+        <input type="text" name="birthdate" placeholder="User birthdate"
+               class="form-control"
+               value="{{ request.form['birthdate'] or user['birthdate'] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="country">country</label>
+        <input type="text" name="country" placeholder="User country"
+               class="form-control"
+               value="{{ request.form['country'] or user['country'] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="city">city</label>
+        <input type="text" name="city" placeholder="User city"
+               class="form-control"
+               value="{{ request.form['city'] or user['city'] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="address">address</label>
+        <input type="text" name="address" placeholder="User address"
+               class="form-control"
+               value="{{ request.form['address'] or user['address'] }}">
+        </input>
+    </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
