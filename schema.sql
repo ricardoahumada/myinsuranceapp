@@ -8,7 +8,8 @@ CREATE TABLE users (
     birthdate TIMESTAMP ,
     country TEXT ,
     city TEXT ,
-    address TEXT 
+    address TEXT, 
+    password TEXT
 );
 
 DROP TABLE IF EXISTS products;
@@ -19,5 +20,6 @@ CREATE TABLE products(
     name TEXT ,
     description TEXT,
     cost float ,
-    is_active boolean 
+    is_active boolean ,
+    user INTEGER
 );

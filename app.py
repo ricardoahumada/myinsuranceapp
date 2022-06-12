@@ -61,16 +61,17 @@ def createuser():
         country= request.form['country']
         city= request.form['city']
         address= request.form['address']
+        password= request.form['password']
 
         if not fullname:
             flash('Fullname is required!')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO users (fullname, email, birthdate, country, city, address) VALUES (?, ?, ?, ?, ? , ?  )',
-                         (fullname, email, birthdate, country, city, address))
+            conn.execute('INSERT INTO users (fullname, email, birthdate, country, city, address,password) VALUES (?, ?, ?, ?, ? , ?,?  )',
+                         (fullname, email, birthdate, country, city, address,password))
             conn.commit()
             conn.close()
-            return redirect(url_for('indexuser'))
+            return redirect(url_for('users'))
 
     return render_template('user/create.html', user=user)
 
@@ -85,17 +86,18 @@ def edituser(id):
         country= request.form['country']
         city= request.form['city']
         address= request.form['address']
+        password= request.form['password']
 
         if not fullname:
             flash('Full name is required!')
         else:
             conn = get_db_connection()
-            conn.execute('UPDATE users SET fullname = ?, email = ?, birthdate=?, country=?, city=?, address=? '
+            conn.execute('UPDATE users SET fullname = ?, email = ?, birthdate=?, country=?, city=?, address=?,password=? '
                          ' WHERE id = ?',
-                         (fullname, email, birthdate, country, city, address, id))
+                         (fullname, email, birthdate, country, city, address, password, id))
             conn.commit()
             conn.close()
-            return redirect(url_for('indexuser'))
+            return redirect(url_for('users'))
 
     return render_template('user/edit.html', user=user)
 
@@ -107,7 +109,7 @@ def deleteuser(id):
     conn.commit()
     conn.close()
     flash('"{}" was successfully deleted!'.format(user['fullname']))
-    return redirect(url_for('indexuser'))
+    return redirect(url_for('users'))
 
 
 
@@ -132,13 +134,14 @@ def createproduct():
         description = request.form['description']
         cost= request.form['cost']
         is_active= request.form['is_active']
-    
+        user= request.form['user']
+
 
         if not name:
             flash('name is required!')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO products (name, description, cost, is_active) VALUES (?, ?, ?, ?)',
+            conn.execute('INSERT INTO products (name, description, cost, is_active,user) VALUES (?, ?, ?, ?,?)',
                          (name, description, cost, is_active))
             conn.commit()
             conn.close()
@@ -155,14 +158,15 @@ def editproduct(id):
         description = request.form['description']
         cost= request.form['cost']
         is_active= request.form['is_active']
+        user= request.form['user']
        
         if not name:
             flash('Full name is required!')
         else:
             conn = get_db_connection()
-            conn.execute('UPDATE products SET name = ?, description = ?, cost=?, is_active=?' 
+            conn.execute('UPDATE products SET name = ?, description = ?, cost=?, is_active=?,user= ?'
                          ' WHERE id = ?',
-                         (name, description, cost, is_active, id))
+                         (name, description, cost, is_active,user, id))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
