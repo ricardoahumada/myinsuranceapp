@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+__version__ = '0.1'
+
+from project import app
+from flask import render_template, request, url_for, flash, redirect
+from project.persistence.products_dao import *
+
+
+@app.route('/products/')
+def products():
+    products = get_products()
+    return render_template('product/indexproduct.html', products=products)
+
+@app.route('/products/<int:product_id>')
+def product(product_id):
+    theproduct = get_product(product_id)
+    return render_template('product/product.html', product=theproduct)
+
+@app.route('/products/create', methods=('GET', 'POST'))
+def createproduct():
+    if request.method == 'POST':
+        app.logger.info(request.form)
+        name = request.form['name']
+        description = request.form['description']
+        cost= request.form['cost']
+        is_active= request.form['is_active']
+        user= request.form['user']
+
+
+        if not name:
+            flash('name is required!')
+        else:
+            create_product(name, description, cost, is_active, user)
+            return redirect(url_for('products'))
+
+    return render_template('product/createproduct.html', product=product)
+
+@app.route('/products/<int:id>/edit', methods=('GET', 'POST'))
+def editproduct(id):
+    product = get_product(id)
+
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        cost= request.form['cost']
+        is_active= request.form['is_active']
+        user= request.form['user']
+       
+        if not name:
+            flash('Full name is required!')
+        else:
+            edit_product(name, description, cost, is_active,user, id)
+            return redirect(url_for('products'))
+
+    return render_template('product/editproduct.html', product=product)
+
+@app.route('/products/<int:id>/delete', methods=('POST',))
+def deleteproduct(id):
+    product = get_product(id)
+    delete_product(id)
+    flash('"{}" was successfully deleted!'.format(product['name']))
+    return redirect(url_for('products'))
