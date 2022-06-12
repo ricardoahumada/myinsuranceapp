@@ -141,8 +141,8 @@ def createproduct():
             flash('name is required!')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO products (name, description, cost, is_active,user) VALUES (?, ?, ?, ?,?)',
-                         (name, description, cost, is_active))
+            conn.execute('INSERT INTO products (name, description, cost, is_active,user) VALUES (?, ?, ?, ?, ?)',
+                         (name, description, cost, is_active, user))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
