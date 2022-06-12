@@ -7,7 +7,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 """ App """
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
-app.debug = True
+app.debug = False
 toolbar = DebugToolbarExtension(app)
 
 from project.controllers.web import *
+from project.controllers.api import *
