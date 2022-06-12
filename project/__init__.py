@@ -10,5 +10,4 @@ app.config['SECRET_KEY'] = 'your secret key'
 app.debug = True
 toolbar = DebugToolbarExtension(app)
 
-from project.persistence import *
-from project.controllers import *
+from project.controllers.web import *
