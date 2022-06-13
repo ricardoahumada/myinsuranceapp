@@ -17,6 +17,16 @@ def get_user(user_id):
         abort(404)
     return user
 
+def get_user_by_passoword(email,password):
+    conn = get_db_connection()
+    user = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?',
+                        (email,password,)).fetchone()
+    conn.close()
+    if user is None:
+        abort(404)
+    return user
+
+
 def create_user(fullname, email, birthdate, country, city, address,password):
     conn = get_db_connection()
     conn.execute('INSERT INTO users (fullname, email, birthdate, country, city, address,password) VALUES (?, ?, ?, ?, ? , ?,?  )',

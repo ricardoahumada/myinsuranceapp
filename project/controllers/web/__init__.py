@@ -6,6 +6,8 @@ import os
 import glob
 from flask import Flask, render_template, redirect, url_for, request
 
+from project.persistence.users_dao import get_user_by_passoword
+
 __all__ = [os.path.basename(
     f)[:-3] for f in glob.glob(os.path.dirname(__file__) + "/*.py")]
 
@@ -22,9 +24,13 @@ def dashboard():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+        email = request.form['email']
+        password= request.form['password']
+        user=get_user_by_passoword(email,password)
+        print(user)
+        if user:
+            return redirect(url_for('users'))
         else:
-            return redirect(url_for('home'))
+            error="Not found"
     return render_template('login.html', error=error)
 
