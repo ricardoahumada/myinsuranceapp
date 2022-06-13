@@ -31,6 +31,6 @@ def login():
         if user:
             return redirect(url_for('users'))
         else:
-            error="Not found"
+            error= "Not found"
     return render_template('login.html', error=error)
 
