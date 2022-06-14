@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-__version__ = '0.1'
-
 from project import app
 from flask import render_template, request, url_for, flash, redirect
 from project.persistence.users_dao import *
+from flask_login import login_required, current_user
 
 
 @app.route('/users/')
