@@ -17,19 +17,19 @@ def get_product(product_id):
         abort(404)
     return product
 
-def create_product(name, description, cost, is_active, user):
+def create_product(name, description, cost, is_active):
     conn = get_db_connection()
-    conn.execute('INSERT INTO products (name, description, cost, is_active,user) VALUES (?, ?, ?, ?, ?)',
-                         (name, description, cost, is_active, user))
+    conn.execute('INSERT INTO products (name, description, cost, is_active) VALUES (?, ?, ?, ?)',
+                         (name, description, cost, is_active))
     conn.commit()
     conn.close()
     return True
 
-def edit_product(name, description, cost, is_active,user, id):
+def edit_product(name, description, cost, is_active, id):
     conn = get_db_connection()
-    conn.execute('UPDATE products SET name = ?, description = ?, cost=?, is_active=?,user= ?'
+    conn.execute('UPDATE products SET name = ?, description = ?, cost=?, is_active=?'
                          ' WHERE id = ?',
-                         (name, description, cost, is_active,user, id))
+                         (name, description, cost, is_active, id))
     conn.commit()
     conn.close()
     return True

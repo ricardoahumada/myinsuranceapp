@@ -9,7 +9,7 @@ from project.persistence.users_dao import *
 @app.route('/users/')
 def users():
     users = get_users()
-    return render_template('user/index.html', users=users)
+    return render_template('user/users.html', users=users)
 
 @app.route('/users/<int:user_id>')
 def user(user_id):

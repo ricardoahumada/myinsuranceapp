@@ -1,4 +1,4 @@
-from project.persistence.users_dao import get_user
+from project.persistence.users_dao import get_user, get_user_by_passoword
 from project import app
 from flask_jwt_extended import create_access_token
 from flask import request, jsonify
@@ -9,8 +9,8 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     # Query your database for username and password
-    user = get_user(1)
-    print(user)
+    user = get_user_by_passoword(email, password)
+    # print(user)
     if user is None:
         # the user was not found on the database
         return jsonify({"msg": "Bad username or password"}), 401

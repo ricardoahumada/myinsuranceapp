@@ -1,62 +1,46 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h1>{% block fullname %} Create a New User {% endblock %}</h1>
-
+{% extends 'base.html' %} {% block content %}
+<h1>{% block fullname %} New User {% endblock %}</h1>
+<br>
 <form method="POST">
     <div class="form-group">
         <label for="fullname">fullname</label>
-        <input type="text" name="fullname"
-               placeholder="User fullname" class="form-control"
-               value="{{ request.form['fullname'] }}"></input>
+        <input type="text" name="fullname" placeholder="User fullname" class="form-control" value="{{ request.form['fullname'] }}"></input>
     </div>
 
-    
+
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" name="email" placeholder="User email"
-               class="form-control"
-               value="{{ request.form['email'] }}">
+        <input type="text" name="email" placeholder="User email" class="form-control" value="{{ request.form['email'] }}">
         </input>
     </div>
 
     <div class="form-group">
         <label for="birthdate">birthdate</label>
-        <input type="text" name="birthdate" placeholder="User birthdate"
-               class="form-control"
-               value="{{ request.form['birthdate'] }}">
+        <input type="text" name="birthdate" placeholder="User birthdate" class="form-control" value="{{ request.form['birthdate'] }}">
         </input>
     </div>
 
     <div class="form-group">
         <label for="country">country</label>
-        <input type="text" name="country" placeholder="User country"
-               class="form-control"
-               value="{{ request.form['country'] }}">
+        <input type="text" name="country" placeholder="User country" class="form-control" value="{{ request.form['country'] }}">
         </input>
     </div>
 
     <div class="form-group">
         <label for="city">city</label>
-        <input type="text" name="city" placeholder="User city"
-               class="form-control"
-               value="{{ request.form['city'] }}">
+        <input type="text" name="city" placeholder="User city" class="form-control" value="{{ request.form['city'] }}">
         </input>
     </div>
 
     <div class="form-group">
         <label for="address">address</label>
-        <input type="text" name="address" placeholder="User address"
-               class="form-control"
-               value="{{ request.form['address'] }}">
+        <input type="text" name="address" placeholder="User address" class="form-control" value="{{ request.form['address'] }}">
         </input>
     </div>
-    
+
     <div class="form-group">
         <label for="password">password</label>
-        <input type="text" name="password" placeholder="User password"
-               class="form-control"
-               value="{{ request.form['password'] }}">
+        <input type="text" name="password" placeholder="User password" class="form-control" value="{{ request.form['password'] }}">
         </input>
     </div>
 

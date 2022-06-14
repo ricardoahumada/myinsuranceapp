@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    created TIMESTAMP ,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fullname TEXT NOT NULL,
     email TEXT NOT NULL,
     birthdate TIMESTAMP ,
@@ -16,10 +16,9 @@ DROP TABLE IF EXISTS products;
 
 CREATE TABLE products(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    created TIMESTAMP ,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     name TEXT ,
     description TEXT,
     cost float ,
-    is_active boolean ,
-    user INTEGER
+    is_active boolean
 );
