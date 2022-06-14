@@ -14,6 +14,7 @@ def api_get_users():
     users = get_users()
     return jsonify(users)
 
+
 @app.route('/api/v1/users/<id>', methods=['GET'])
 # @jwt_required()
 def api_get_user(id):
@@ -21,17 +22,30 @@ def api_get_user(id):
     user = get_user(id)
     return jsonify(user)
 
+
+@app.route('/api/v1/users/<id>', methods=['POSt'])
+# @jwt_required()
+def api_update_user(id):
+    # print(get_jwt_identity)
+    user = request.json
+    ok = edit_user(user["fullname"], user["email"], user["birthdate"], user["country"], user["city"], user["address"], user["password"], id)
+
+    return jsonify({'ok': ok})
+
+
 @app.route('/api/v1/users/<id>', methods=['DELETE'])
 # @jwt_required()
 def api_delete_user(id):
     # print(get_jwt_identity)
-    delete_user(id)
-    return jsonify({'ok': True})
+    ok = delete_user(id)
+    return jsonify({'ok': ok})
+
 
 @app.route('/api/v1/users/', methods=['POST'])
-def api_post_users():
+def api_create_user():
     # print(get_jwt_identity)
     user = request.json
     print(user)
-    create_user(user.fullname, user.email, user.birthdate, user.country, user.city, user.address, user.password)
-    return jsonify({'ok': True})
+    ok = create_user(user["fullname"], user["email"], user["birthdate"],
+                     user["country"], user["city"], user["address"], user["password"])
+    return jsonify({'ok': ok})

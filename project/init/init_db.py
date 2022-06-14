@@ -28,6 +28,14 @@ cur.execute("INSERT INTO Products (name , description , cost, is_active) VALUES 
             ('Health & Life Insurance', 'As your life changes, our solutions change with you— giving you the confidence you need to look after the ones you love. Addressing the health and wellbeing protection needs of our clients worldwide, we offer international health, life and disability insurance, as well as a wide range of health and protection services to private individuals, families, organizations and partners.', 20, True)
             )
 
+cur.execute("INSERT INTO product_users (product_id, user_id) VALUES (?, ?)",
+            (1, 1))
 
+cur.execute("INSERT INTO product_users (product_id, user_id) VALUES (?, ?)",
+            (2, 1))            
+
+cur.execute("INSERT INTO product_users (product_id, user_id) VALUES (?, ?)",
+            (1, 2))
+            
 connection.commit()
 connection.close()

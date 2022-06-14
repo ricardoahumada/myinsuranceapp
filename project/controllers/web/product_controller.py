@@ -58,6 +58,6 @@ def editproduct(id):
 @app.route('/products/<int:id>/delete', methods=('POST',))
 def deleteproduct(id):
     product = get_product(id)
-    delete_product(id)
+    ok = delete_product(id)
     flash('"{}" was successfully deleted!'.format(product['name']))
     return redirect(url_for('products'))

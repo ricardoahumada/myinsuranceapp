@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 __version__ = '0.1'
 
+from itertools import product
 from project import app
 from flask import jsonify, request
 from project.persistence.products_dao import *
@@ -14,6 +15,7 @@ def api_get_products():
     products = get_products()
     return jsonify(products)
 
+
 @app.route('/api/v1/products/<id>', methods=['GET'])
 # @jwt_required()
 def api_get_product(id):
@@ -21,17 +23,30 @@ def api_get_product(id):
     product = get_product(id)
     return jsonify(product)
 
+
+@app.route('/api/v1/products/<id>', methods=['POSt'])
+# @jwt_required()
+def api_update_product(id):
+    # print(get_jwt_identity)
+    product = request.json
+    ok = edit_product(product["name"], product["description"],
+                        product["cost"], product["is_active"], id)
+
+    return jsonify({'ok': ok})
+
 @app.route('/api/v1/products/<id>', methods=['DELETE'])
 # @jwt_required()
 def api_delete_product(id):
     # print(get_jwt_identity)
-    delete_product(id)
-    return jsonify({'ok': True})
+    ok = delete_product(id)
+    return jsonify({'ok': ok})
+
 
 @app.route('/api/v1/products/', methods=['POST'])
 def api_post_products():
     # print(get_jwt_identity)
     product = request.json
-    print(product)
-    create_product(product.name, product.description, product.cost, product.is_active, product.user)
-    return jsonify({'ok': True})
+    # print(product)
+    ok = create_product(product["name"], product["description"],
+                        product["cost"], product["is_active"])
+    return jsonify({'ok': ok})
