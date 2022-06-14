@@ -9,7 +9,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 @app.route('/api/v1/products/', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def api_get_products():
     # print(get_jwt_identity)
     products = get_products()
@@ -17,7 +17,7 @@ def api_get_products():
 
 
 @app.route('/api/v1/products/<id>', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def api_get_product(id):
     # print(get_jwt_identity)
     product = get_product(id)
@@ -25,7 +25,7 @@ def api_get_product(id):
 
 
 @app.route('/api/v1/products/<id>', methods=['POSt'])
-# @jwt_required()
+@jwt_required()
 def api_update_product(id):
     # print(get_jwt_identity)
     product = request.json
@@ -35,7 +35,7 @@ def api_update_product(id):
     return jsonify({'ok': ok})
 
 @app.route('/api/v1/products/<id>', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def api_delete_product(id):
     # print(get_jwt_identity)
     ok = delete_product(id)

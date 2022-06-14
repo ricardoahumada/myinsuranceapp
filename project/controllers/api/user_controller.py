@@ -8,7 +8,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 @app.route('/api/v1/users/', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def api_get_users():
     # print(get_jwt_identity)
     users = get_users()
@@ -16,7 +16,7 @@ def api_get_users():
 
 
 @app.route('/api/v1/users/<id>', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def api_get_user(id):
     # print(get_jwt_identity)
     user = get_user(id)
@@ -24,7 +24,7 @@ def api_get_user(id):
 
 
 @app.route('/api/v1/users/<id>', methods=['POSt'])
-# @jwt_required()
+@jwt_required()
 def api_update_user(id):
     # print(get_jwt_identity)
     user = request.json
@@ -34,7 +34,7 @@ def api_update_user(id):
 
 
 @app.route('/api/v1/users/<id>', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def api_delete_user(id):
     # print(get_jwt_identity)
     ok = delete_user(id)
