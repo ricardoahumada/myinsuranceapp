@@ -1,3 +1,4 @@
 Flask
 Flask-login
 Flask-DebugToolbar
+Flask-JWT-Extended
