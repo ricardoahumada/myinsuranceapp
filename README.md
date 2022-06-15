@@ -1,14 +1,15 @@
-"# myinsuranceapp" 
+"# My Insurance App" 
+
 
 Dependencies :
 	
-    If you have old version of project: pip uninstall -r requirements.txt
-	pip install -r requirements.txt
+    - If you have old version of project: pip uninstall -r requirements.txt
+	- pip install -r requirements.txt
 
-Init database:
+Init database :
 
-    py project/init/init_db.py
+    - py project/init/init_db.py
 
-To run:
+Run the server:
 
-    py runserver.py
+    - py runserver.py

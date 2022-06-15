@@ -1,5 +1,5 @@
 from project import app
-from flask import render_template, request, url_for, redirect, Blueprint
+from flask import render_template, request, url_for, redirect, session
 from project.persistence.users_dao import get_user_by_passoword
 
 
@@ -13,11 +13,13 @@ def login():
         user = get_user_by_passoword(email, password)
         print("user:",user)
         if user:
+            session["id"] = user['id']
             return redirect(url_for('products'))
         else:
             error = "User not found"
-    return render_template('login.html', error=error)
+    return render_template('login.html', error=error, is_login=True)
 
 @app.route('/logout')
 def logout():
-    return 'Logout'
+    session["id"] = None
+    return redirect("/login")
