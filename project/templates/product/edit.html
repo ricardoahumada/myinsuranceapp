@@ -5,7 +5,7 @@
 
 <form method="POST">
     <div class="form-group">
-        <label for="name">Full Name</label>
+        <label for="name">Name</label>
         <input type="text" name="name" placeholder="product name"
                class="form-control"
                value="{{ request.form['name'] or product['name'] }}">
@@ -13,27 +13,28 @@
     </div>
 
     <div class="form-group">
-        <label for="description">description</label>
-        <input type="text" name="description" placeholder="product description"
+        <label for="description">Description</label>
+        <input type="text" name="description" placeholder="Product description"
                class="form-control"
                value="{{ request.form['description'] or product['description'] }}">
         </input>
     </div>
 
     <div class="form-group">
-        <label for="cost">cost</label>
-        <input type="text" name="cost" placeholder="product cost"
+        <label for="cost">Cost</label>
+        <input type="number" name="cost" placeholder="Product cost"
                class="form-control"
                value="{{ request.form['cost'] or product['cost'] }}">
         </input>
     </div>
 
     <div class="form-group">
-        <label for="is_active">is_active</label>
-        <input type="text" name="is_active" placeholder="product is_active"
-               class="form-control"
-               value="{{ request.form['is_active'] or product['is_active'] }}">
-        </input>
+        <div class="form-check">
+            <input class="form-check-input" name="is_active" type="checkbox" value="1" id="is_active" {{ "checked" if request.form['is_active'] or product['is_active'] else "" }}>
+            <label class="form-check-label" for="is_active">
+              Is active
+            </label>
+          </div>
     </div>
 
     
