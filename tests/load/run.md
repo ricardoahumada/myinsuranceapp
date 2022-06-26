@@ -8,3 +8,4 @@ To run the tests:
 ### Apache Benchmark
     - Move to bin directory in apache (eg D:\Program Files\xampp\apache\bin)
     - ab -n100 -c2 http://httpbin.test.k6.io/
+      - This launch 100 requests with 20 simultaneous each time
