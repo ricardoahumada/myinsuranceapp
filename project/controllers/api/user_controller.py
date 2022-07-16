@@ -49,3 +49,10 @@ def api_create_user():
     ok = create_user(user["fullname"], user["email"], user["birthdate"],
                      user["country"], user["city"], user["address"], user["password"])
     return jsonify({'ok': ok})
+
+@app.route('/api/v1/users/<id>/products', methods=['GET'])
+# @jwt_required()
+def api_get_user_products(id):
+    # print(get_jwt_identity)
+    user = get_user(id)
+    return jsonify(user)

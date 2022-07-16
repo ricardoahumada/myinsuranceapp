@@ -51,3 +51,10 @@ def delete_user(id):
     conn.commit()
     conn.close()
     return True
+
+def get_user_products(user_id):
+    conn = get_db_connection()
+    products = conn.execute('SELECT products.* from products, product_users WHERE products.id=product_users.product_id AND product_users.user_id=?',
+                        (user_id,)).fetchall()
+    conn.close()
+    return products
