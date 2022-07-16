@@ -51,8 +51,8 @@ def api_create_user():
     return jsonify({'ok': ok})
 
 @app.route('/api/v1/users/<id>/products', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def api_get_user_products(id):
     # print(get_jwt_identity)
-    user = get_user(id)
-    return jsonify(user)
+    products = get_user_products(id)
+    return jsonify(products)
