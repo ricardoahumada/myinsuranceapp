@@ -1,9 +1,9 @@
 # My Insurance App
 
 ## Install Dependencies
-- pip install -r requirements.txt
+- pip3 install -r requirements.txt
   - If you have old version of project: 
-    - pip uninstall -r requirements.txt
+    - pip3 uninstall -r requirements.txt
 
 ## Init database (before running the server)
 - python3 project/init/init_db.py
