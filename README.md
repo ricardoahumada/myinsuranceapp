@@ -39,8 +39,11 @@
 - Unit tests:
   -  python3 -m unittest discover -s tests/unit -v
 - Acceptance tests from inside:
-  - python3 -m unittest discover -s tests/acceptance -v
+  - python3 -m unittest discover -s tests/acceptance-flask -v
 - Acceptance tests from outside:
-  - python3 -m unittest discover -s tests/acceptance-ext -v
+  - python3 -m unittest discover -s tests/acceptance-request -v
+    - For this is necessary that the service be running
+- Load Tests:
+  - k6 run sample-load-test.js
     - For this is necessary that the service be running
 
