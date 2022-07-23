@@ -1,14 +1,24 @@
+# see the comments in acceptance-flask/test_app_flask_tester.py file first.
 import json
 import unittest
-import requests
+import requests # import the reques library for sending requests to real running endpoints
+
+# as you can see we DON'T import the app from project, since we are going to test the running app
+# for that reason, you must first start the app, before passing the test
 
 class TestApp(unittest.TestCase):
     token=''
+
+    # define a variable for the base API url to be tested. We will concat the endpoint to this.
     base_url='http://localhost:5000/api/v1'
 
     def test_1_getToken(self):
+        # defines the url...in this case: will be: http://localhost:5000/api/v1/token
         url=f"{self.base_url}/token"
         test_data = {"email":"jd@myinsuranceapp.com","password":"passwordjd"}
+
+        # here we are using the request library to send the POST request data to the url
+        # this is really the only difference with the flask based tests
         response = requests.post(url, json=test_data)
         data=json.loads(response.text)
         print(f"post: {data}")
