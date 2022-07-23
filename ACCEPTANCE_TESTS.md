@@ -36,7 +36,7 @@ def api_get_user_products(id):
      - etc.
      - you can use various functions for this
   
-### Two type of tests
+### Two types of tests
 We can use two types of tokens for testing the endpoint:
   - Using the **"flask test_client"**: to simulate the requests.
     - For this, we need to **import the app** in the test case.
