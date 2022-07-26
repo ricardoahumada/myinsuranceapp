@@ -62,6 +62,6 @@ def api_get_user_products(id):
 def api_add_product_for_user(id):
     # print(get_jwt_identity)
     product = request.json
-    ok = add_product_for_user(product["id"],id)
+    ok = add_product_for_user(id, product["id"])
     products = get_user_products(id)
     return jsonify(products)
