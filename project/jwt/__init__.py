@@ -6,7 +6,7 @@ from flask import request, jsonify
 
 @app.route("/api/v1/token", methods=["POST"])
 def create_token():
-    print(request.json)
+    # print(request.json)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     # Query your database for username and password
