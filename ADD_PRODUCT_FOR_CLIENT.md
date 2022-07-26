@@ -53,5 +53,5 @@ This endpoint allows adding a product to an user.
 
 ## Available data:
 Currently in the database, once inited, there are
-- Users: 2
-- Products 4
+- Users: 2, ids: 1,2
+- Products 4, ids: 1,2,3,4
