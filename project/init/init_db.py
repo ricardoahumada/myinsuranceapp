@@ -28,6 +28,15 @@ cur.execute("INSERT INTO Products (name , description , cost, is_active) VALUES 
             ('Health & Life Insurance', 'As your life changes, our solutions change with you— giving you the confidence you need to look after the ones you love. Addressing the health and wellbeing protection needs of our clients worldwide, we offer international health, life and disability insurance, as well as a wide range of health and protection services to private individuals, families, organizations and partners.', 20, True)
             )
 
+cur.execute("INSERT INTO Products (name , description , cost, is_active) VALUES (?, ?, ?, ?)",
+            ('Life & Disability Insurance', 'Our Life and Disability plans are aimed to safeguard the future of your employees and their families, no matter what the future holds.', 100, True)
+            )
+
+cur.execute("INSERT INTO Products (name , description , cost, is_active) VALUES (?, ?, ?, ?)",
+            ('COVID-19 support', 'We cover treatment for COVID-19. Vaccination costs are also covered if you have this benefit within your policy. Please note, cover is subject to terms and conditions, benefit limits and area of cover of the policy and costs must be reasonable and customary.', 0, True)
+            )
+
+# USER-PRODUCTS
 cur.execute("INSERT INTO product_users (product_id, user_id) VALUES (?, ?)",
             (1, 1))
 

@@ -21,9 +21,9 @@
 ## API endpoints
 - Authenticate: http://localhost:5000/api/v1/token
   - Method POST
-  - Payload {email:<email_value>,password:<pass_value>}
+  - Payload {email:[email_value],password:[pass_value]}
   - All endpoints require token in header in this way:
-    - {Authorization: Bearer [TOKEN]}
+    - 'Authorization: Bearer [TOKEN]'
 - Endpoints:
   - Users: 
     - GET|POST [BASE_URL]/api/v1/users/

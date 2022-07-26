@@ -58,3 +58,11 @@ def get_user_products(user_id):
                         (user_id,)).fetchall()
     conn.close()
     return products
+
+def add_product_for_user(user_id, product_id):
+    conn = get_db_connection()
+    conn.execute('INSERT INTO product_users (product_id, user_id) VALUES (?, ?)',
+                 (product_id, user_id))
+    conn.commit()
+    conn.close()
+    return True

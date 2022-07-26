@@ -56,3 +56,12 @@ def api_get_user_products(id):
     # print(get_jwt_identity)
     products = get_user_products(id)
     return jsonify(products)
+
+@app.route('/api/v1/users/<id>/products', methods=['POST'])
+@jwt_required()
+def api_add_product_for_user(id):
+    # print(get_jwt_identity)
+    product = request.json
+    ok = add_product_for_user(product["id"],id)
+    products = get_user_products(id)
+    return jsonify(products)

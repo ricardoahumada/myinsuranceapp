@@ -43,6 +43,7 @@ def api_delete_product(id):
 
 
 @app.route('/api/v1/products/', methods=['POST'])
+@jwt_required()
 def api_post_products():
     # print(get_jwt_identity)
     product = request.json
