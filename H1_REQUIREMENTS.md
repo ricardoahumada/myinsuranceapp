@@ -55,22 +55,22 @@ You can publish the image in dockerhub or acr. For ACR case, this comfig must be
 
 ### 5. Kubernetes workloads
 You can deploy in minikube or AKS. In any case, the kubernetes workloads must be called like this:
-- deployment:
-- service:
-You must port forward the service to this port:
-- 5050
+- deployment: myinsuranceapp[YOURFIRSTNAME]-deployment
+- service: myinsuranceapp[YOURFIRSTNAME]-service
+- It is required **8 replicas** for the app
+- You must port forward the service to this port: **5050**
 
 ### 6. AKS cluster
 The cluster definition must have next characteristics:
 - name: akshackathon[YOURFIRSTNAME]
-- nodes: 2
+- nodes: **2**
 - location: eastasia
-Must not contain sensitive information
+- ⚠ Must not expose sensitive information
 
 <a name="Solution_delivery"></a>
 ## Solution delivery
 - You must upload your solution to the campus (https://campus2.netmind.es/mod/assign/view.php?id=12632).
 - The delivery must iclude:
-  - The github repo url (please add me to the collaborators)
-  - The jenkins server url ([IP]:8080)
-  - The AKS name and url/Fqdn
+  - ✔️ The github repo url (please, add me to the collaborators)
+  - ✔️ The jenkins server url ([IP]:8080)
+  - ✔️ The AKS name and url/Fqdn
