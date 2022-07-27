@@ -54,7 +54,7 @@ You can publish the image in dockerhub or acr. For ACR case, this comfig must be
 - password2: RTJY/KJMsIgSLCpQfZepgicay3t5PoYG
 
 ### 5. Kubernetes workloads
-You can deploy in mminikube or AKS. In any case, the kubernetes workloads must be called like this:
+You can deploy in minikube or AKS. In any case, the kubernetes workloads must be called like this:
 - deployment:
 - service:
 You must port forward the service to this port:
